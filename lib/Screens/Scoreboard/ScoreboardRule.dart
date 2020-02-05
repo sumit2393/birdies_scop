@@ -375,7 +375,7 @@ class _ScoreboardRuleState extends State<ScoreboardRule> {
                               Container(
                                 width: 50,
                                 height: 50,
-                                margin: EdgeInsets.only(right: 75),
+                                 margin: EdgeInsets.only(right: 75),
                                 decoration: new BoxDecoration(
                                     borderRadius: new BorderRadius.circular(25.0),
                                     color: Colors.grey,
