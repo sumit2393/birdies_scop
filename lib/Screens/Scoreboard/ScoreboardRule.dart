@@ -332,7 +332,7 @@ class _ScoreboardRuleState extends State<ScoreboardRule> {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: <Widget>[
-                                    Text("Hole "+selected_hole, style: TextStyle(fontWeight: FontWeight.bold),),
+                                    Text("Hole "+(parList.length+1).toString(), style: TextStyle(fontWeight: FontWeight.bold),),
                                     Text("Enter par",style: TextStyle(color: Colors.grey),),
                                   ],
                                 ),
@@ -572,7 +572,8 @@ class _ScoreboardRuleState extends State<ScoreboardRule> {
                                                 },
                                                 width: MediaQuery.of(context).size.width,
                                                 label: Text(
-                                                  "Slide to finish game ->",
+                                                  selected_hole != "18" ?
+                                                  "Slide to next hole ->": "Slide to finish game ->" ,
                                                   style: TextStyle(
                                                       color: Color(0xff4a4a4a), fontWeight: FontWeight.w500, fontSize: 17),
                                                 ),
