@@ -93,7 +93,7 @@ class _ScoreboardRuleState extends State<ScoreboardRule> {
                                     child: ListView.builder(
                                       shrinkWrap: true,
                                       scrollDirection: Axis.vertical,
-                                      itemCount: 4,
+                                      itemCount: parList.length,
                                       itemBuilder: (context,index){
                                         return Container(
                                           width: 50,
@@ -324,7 +324,7 @@ class _ScoreboardRuleState extends State<ScoreboardRule> {
                                   ),
                                 ),
                                 child: Center(
-                                    child: Text(selected_hole, style: TextStyle(color: Colors.black,fontSize: 18, fontWeight: FontWeight.bold),)
+                                    child: Text((parList.length+1).toString(), style: TextStyle(color: Colors.black,fontSize: 18, fontWeight: FontWeight.bold),)
                                 ),
                               ),
                               Container(
@@ -466,7 +466,7 @@ class _ScoreboardRuleState extends State<ScoreboardRule> {
                                                                       ),
                                                                     ),
                                                                     child: Center(
-                                                                        child: Text(index == 0 ? selected_hole: shortUserName, style: TextStyle(color: Colors.black,fontSize: 18, fontWeight: FontWeight.bold),)
+                                                                        child: Text(index == 0 ? (parList.length+1).toString(): shortUserName, style: TextStyle(color: Colors.black,fontSize: 18, fontWeight: FontWeight.bold),)
                                                                     ),
                                                                   ),
                                                                   Container(
@@ -474,7 +474,7 @@ class _ScoreboardRuleState extends State<ScoreboardRule> {
                                                                     child: Column(
                                                                       crossAxisAlignment: CrossAxisAlignment.start,
                                                                       children: <Widget>[
-                                                                        Text(index == 0 ? "Hole "+selected_hole: usersList[index-1], style: TextStyle(fontWeight: FontWeight.bold),),
+                                                                        Text(index == 0 ? "Hole "+(parList.length+1).toString(): usersList[index-1], style: TextStyle(fontWeight: FontWeight.bold),),
                                                                         Row(
                                                                           children: <Widget>[
                                                                             Text(index == 0 ? "Enter par" : "Currently ",style: TextStyle(color: Colors.grey),),
