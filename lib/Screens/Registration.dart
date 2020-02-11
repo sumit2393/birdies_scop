@@ -1,5 +1,9 @@
 import 'dart:io';
+import 'package:birdies_scop/Screens/HomePage.dart';
+import 'package:birdies_scop/Screens/Login.dart';
 import 'package:birdies_scop/Screens/UserProfile.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:image_picker/image_picker.dart';
@@ -12,23 +16,38 @@ class Registration extends StatefulWidget {
 }
 
 class _RegistrationState extends State<Registration> {
-
+  final GlobalKey<FormState> _registerFormKey = GlobalKey<FormState>();
   String email,name,handicap,starting_position,password,repeat_password;
 
-  TextEditingController emailEditingContrller = TextEditingController();
+  TextEditingController emailEditingContrller;
+  TextEditingController nameEditingController;
+  TextEditingController handicapEditingController;
+  TextEditingController starting_posEditingController;
+  TextEditingController passwordEditingController;
+  TextEditingController repeat_pas_EditingController;
 
   File _image;
 
-
   @override
   void initState() {
+    super.initState();
+
+    emailEditingContrller=TextEditingController();
+    nameEditingController=TextEditingController();
+    handicapEditingController=TextEditingController();
+    starting_posEditingController=TextEditingController();
+    passwordEditingController=TextEditingController();
+    repeat_pas_EditingController= TextEditingController();
+
     email = "";
     name = "";
     handicap = "";
     starting_position = "";
     password = "";
     repeat_password = "";
+
   }
+
 
   Future getImage() async {
     var image = await ImagePicker.pickImage(source: ImageSource.gallery);
@@ -64,7 +83,9 @@ class _RegistrationState extends State<Registration> {
                         ),
                         Container(
                           margin: EdgeInsets.only(bottom: 10),
-                          child: TextField(
+                          child: TextFormField(
+                            controller: emailEditingContrller,
+                         //   validator:emailValidator,
                             decoration: InputDecoration(
                               border: InputBorder.none,
                               contentPadding: EdgeInsets.all(15),
@@ -202,7 +223,9 @@ class _RegistrationState extends State<Registration> {
                         ),
                         Container(
                           margin: EdgeInsets.only(bottom: 10),
-                          child: TextField(
+                          child: TextFormField(
+                            controller: passwordEditingController,
+                           // validator: pwdValidator,
                             obscureText: true,
                             decoration: InputDecoration(
                               border: InputBorder.none,
@@ -269,9 +292,28 @@ class _RegistrationState extends State<Registration> {
                                 child: Text("CREATE ACCOUNT",style: TextStyle(color: Colors.white,fontSize: 16))
                             ),
                             onPressed: (){
-                              Navigator.of(context).push(MaterialPageRoute(builder: (context){
-                                return MyApp();
-                              }));
+
+                              FirebaseAuth.instance.createUserWithEmailAndPassword(email: email.toLowerCase().trim(), password: password).then((currentUser) {
+
+                                Map<String,dynamic> userMap = new Map();
+                                userMap.putIfAbsent("email", () => email);
+                                userMap.putIfAbsent("handicap", () => handicap);
+                                userMap.putIfAbsent("name", () => name);
+                                userMap.putIfAbsent("starting_position", () => starting_position);
+
+                                Firestore.instance.collection("user").document(currentUser.user.uid).setData(userMap).whenComplete((){
+                                  print("Logged In");
+                                 return Navigator.of(context).push(MaterialPageRoute(builder: (context){
+                                   return HomePage();
+                                 }));
+                                }).catchError((error){
+                                  print("ErrorPrint2: "+error.toString());
+                                });
+
+                              }).catchError((error){
+                                print("ErrorPrint1: "+error.toString());
+                              });
+
                             },
                             padding: EdgeInsets.all(20),
                             color: Colors.transparent,
