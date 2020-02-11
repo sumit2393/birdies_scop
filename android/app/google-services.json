@@ -1,0 +1,83 @@
+{
+  "project_info": {
+    "project_number": "273826925551",
+    "firebase_url": "https://birdiescope-264206.firebaseio.com",
+    "project_id": "birdiescope-264206",
+    "storage_bucket": "birdiescope-264206.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:273826925551:android:586c7d1121a17af4b1441a",
+        "android_client_info": {
+          "package_name": "com.example.birdies_scop"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "273826925551-esnq5hs66d0n6sjbtp15ks7uusa18562.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCmNtf4xCTpePnxfHbdhy9BqEEs63f3ch0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "273826925551-esnq5hs66d0n6sjbtp15ks7uusa18562.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "273826925551-rvl44grdftt759a56auhtt1gjc6t622l.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.thumbnailconsulting.birdiescope"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:273826925551:android:cd94359da74556dcb1441a",
+        "android_client_info": {
+          "package_name": "com.thumbnailconsulting.birdiescope"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "273826925551-esnq5hs66d0n6sjbtp15ks7uusa18562.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCmNtf4xCTpePnxfHbdhy9BqEEs63f3ch0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "273826925551-esnq5hs66d0n6sjbtp15ks7uusa18562.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "273826925551-rvl44grdftt759a56auhtt1gjc6t622l.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.thumbnailconsulting.birdiescope"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
