@@ -54,6 +54,7 @@ flutter:
     - assets/images/bg.jpg
     - assets/images/birdbg.png
     - assets/images/profile_photo.png
+    - assets/images/blackcover.jpg
 
   # To add assets to your application, add an assets section, like this:
   # assets:

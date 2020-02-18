@@ -1,5 +1,6 @@
 import 'package:birdies_scop/Screens/Login.dart';
-import 'package:birdies_scop/Screens/PaymentStripe/PaymentDetail.dart';
+import 'package:birdies_scop/Screens/PaymentStripe/AddCard.dart';
+import 'package:birdies_scop/Screens/PaymentStripe/PaymentUnlock.dart';
 import 'package:birdies_scop/Screens/Settings.dart';
 import 'package:birdies_scop/Screens/SettingsTabs/SettingsMyProfile.dart';
 import 'package:birdies_scop/Screens/ViewDrone/ViewDroneMain.dart';
@@ -27,7 +28,7 @@ class _MyAppState extends State<MyApp> {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-       home:ViewDroneMain()
+       home:Payment_Unlock()
      );
   }
 }
