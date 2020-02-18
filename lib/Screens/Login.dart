@@ -3,8 +3,10 @@ import 'package:birdies_scop/Screens/Registration.dart';
 import 'package:birdies_scop/main.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:progress_dialog/progress_dialog.dart';
 
 class Login extends StatefulWidget {
+
   @override
   _LoginState createState() => _LoginState();
 }
@@ -13,7 +15,7 @@ class _LoginState extends State<Login> {
   String email, password;
   bool hidePass;
   Icon passIcon;
-
+  ProgressDialog pr;
   @override
   void initState() {
   email="";
@@ -24,6 +26,21 @@ class _LoginState extends State<Login> {
 
   @override
   Widget build(BuildContext context) {
+    pr = new ProgressDialog(context);
+    pr.style(
+        message: 'Please Waiting...',
+        borderRadius: 10.0,
+        backgroundColor: Colors.white,
+        progressWidget: CircularProgressIndicator(),
+        elevation: 10.0,
+        insetAnimCurve: Curves.easeInOut,
+        progress: 0.0,
+        maxProgress: 100.0,
+        progressTextStyle: TextStyle(
+            color: Colors.black, fontSize: 13.0, fontWeight: FontWeight.w400),
+        messageTextStyle: TextStyle(
+            color: Colors.black, fontSize: 19.0, fontWeight: FontWeight.w600)
+    );
     return Scaffold(
       appBar: null,
       body: SafeArea(
@@ -75,6 +92,7 @@ class _LoginState extends State<Login> {
                     margin: EdgeInsets.all(15),
                     child: Column(
                       children: <Widget>[
+
                         Container(
                           child: Container(
                             margin: EdgeInsets.only(bottom: 10),
@@ -164,22 +182,17 @@ class _LoginState extends State<Login> {
                                         color: Colors.white, fontSize: 16))
                             ),
                             onPressed: () {
-                              
+                              pr.show();
                               FirebaseAuth.instance.signInWithEmailAndPassword(
                                   email: email,
                                   password: password
-                              ).then((value) =>
+                              ).then((value){pr.hide().whenComplete(()
+    {
+
                                   Navigator.of(context).push(MaterialPageRoute(
                                       builder: (context) {
                                         return HomePage();
-                                      }))
-                              ).catchError((error){
-
-                                Scaffold.of(context).showSnackBar(
-                                    SnackBar(
-                                      content: Text(error.toString()),
-                                    )
-                                );
+                                      }));}).catchError((error) {} );
 
                               });
                             },

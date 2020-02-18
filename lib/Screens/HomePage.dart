@@ -1,7 +1,6 @@
 import 'package:birdies_scop/Screens/LogoutPage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-
 import 'Login.dart';
 import 'Scoreboard/ScoreboardRule.dart';
 import 'Settings.dart';
@@ -15,16 +14,12 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   List<Widget> _children = [UserProfile(), ScoreboardRule(), Settings(), Logout() ];
   int _currentIndex;
-
-
   @override
   void initState() {
     _currentIndex = 0;
   }
-
   @override
   Widget build(BuildContext context) {
-
     return MaterialApp(
       home: Scaffold(
         resizeToAvoidBottomPadding: false,
@@ -67,4 +62,3 @@ class _HomePageState extends State<HomePage> {
     );
   }
 }
-
