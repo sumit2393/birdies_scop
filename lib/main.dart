@@ -1,9 +1,12 @@
 import 'package:birdies_scop/Screens/Login.dart';
+import 'package:birdies_scop/Screens/Scoreboard/GameFinished.dart';
 import 'package:birdies_scop/Screens/Settings.dart';
 import 'package:birdies_scop/Screens/SettingsTabs/SettingsMyProfile.dart';
+import 'package:birdies_scop/Screens/ViewDrone/ViewDroneMain.dart';
 import 'package:flutter/material.dart';
 import 'Screens/Scoreboard/ScoreboardEdit.dart';
 import 'Screens/Scoreboard/ScoreboardRule.dart';
+import 'Screens/ScorecardView.dart';
 import 'Screens/UserProfile.dart';
 
 
@@ -24,7 +27,7 @@ class _MyAppState extends State<MyApp> {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-       home: Login()
+       home: GameFinished()
      );
   }
 }
