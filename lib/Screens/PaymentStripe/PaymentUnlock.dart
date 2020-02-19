@@ -31,7 +31,10 @@ class _Payment_UnlockState extends State<Payment_Unlock> {
                             Container(
                                 height:250,
                                 child: Image.asset('assets/images/blackcover.jpg')
+
                             ),
+
+
                             Container(
                               padding: EdgeInsets.all(10),
                               child: Column(
