@@ -29,20 +29,16 @@ class _Payment_DetailsState extends State<Payment_Details> {
   @override
   initState(){
     super.initState();
-
     cardsList = ["Chase Unlimited","Swift Life","Excess One"];
     cardNumbersList = ["121645454654","6874687687465","654864654654"];
     cardExpiresList = ["11/22","02/25","09/35"];
     cardNamesList = ["Chris Arok", "Hanna M", "Freeman"];
 
     // stripe payment
-
     _stripePayment.setStripeSettings("pk_test_ifyKDeYk6BosOqgp67qjvWBC00Wu3Ykj2q" );
     _stripePayment.onCancel = () {
       print("the payment form was cancelled");
     };
-
-
 
 
   }
