@@ -8,7 +8,30 @@ import 'package:flutter/material.dart';
    @override
    Widget build(BuildContext context) {
      return MaterialApp(
+       debugShowCheckedModeBanner: true,
+       home: Scaffold(
+         body: SafeArea(
+           child: SingleChildScrollView(
+             child: Column(
+               children: <Widget>[
+            Stack(
+              children: <Widget>[
+                Container(
+               height: 240,
+               width: MediaQuery.of(context).size.width,
+               child: Image.asset(
+                 "assets/images/bg.jpg",
+                 fit: BoxFit.fill,
+               ),
 
+                )
+              ],
+            )
+               ],
+             ),
+           ),
+         ),
+       ),
 
 
      );

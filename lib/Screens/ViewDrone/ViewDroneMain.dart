@@ -1,3 +1,6 @@
+import 'dart:collection';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -21,6 +24,8 @@ class _ViewDroneMainState extends State<ViewDroneMain> {
   List<dynamic> parList;
 
   String selected_hole;
+  Map<String, dynamic> courseMap;
+  Map<String,dynamic> footage_url;
 
   @override
   void initState() {
@@ -33,6 +38,8 @@ class _ViewDroneMainState extends State<ViewDroneMain> {
     ];
     parList = [2, 4, 3, 4];
     selected_hole = "0";
+
+    getDataFromFirebase();
 
     _controller = VideoPlayerController.network(
       'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4',
@@ -161,14 +168,14 @@ class _ViewDroneMainState extends State<ViewDroneMain> {
                                     CrossAxisAlignment.center,
                                     children: <Widget>[
                                       Text(
-                                        'Pebble Beach',
+                                        courseMap["course_name"].toString(),
                                         style: TextStyle(
                                             fontWeight: FontWeight.bold,
                                             fontSize: 20,
                                             color: Colors.white),
                                       ),
                                       Text(
-                                        'Santa Cruz, CA - 07/24/2019',
+                                        courseMap["course_area"].toString()+ ' - ' + '07/24/2019',
                                         style: TextStyle(
                                             fontWeight: FontWeight.bold,
                                             fontSize: 16,
@@ -670,7 +677,7 @@ class _ViewDroneMainState extends State<ViewDroneMain> {
                                             crossAxisAlignment: CrossAxisAlignment.center,
                                             mainAxisAlignment: MainAxisAlignment.center,
                                             children: <Widget>[
-                                              Text("5",style: TextStyle(color:Colors.white,fontSize: 36, fontWeight: FontWeight.bold),),
+                                              Text(courseMap["par"].toString(),style: TextStyle(color:Colors.white,fontSize: 36, fontWeight: FontWeight.bold),),
                                               Text("Par",style: TextStyle(color:Colors.white,fontSize: 36, fontWeight: FontWeight.normal),),
                                             ],
                                           ),
@@ -705,7 +712,7 @@ class _ViewDroneMainState extends State<ViewDroneMain> {
                                               Text("Blue",style: TextStyle(color:Colors.blue, fontSize: 26, fontWeight: FontWeight.bold),),
                                               Row(
                                                 children: <Widget>[
-                                                  Text("572",style: TextStyle(color:Colors.black, fontSize: 22, fontWeight: FontWeight.normal),),
+                                                  Text(courseMap["blue"].toString(),style: TextStyle(color:Colors.black, fontSize: 22, fontWeight: FontWeight.normal),),
                                                   Text("yd",style: TextStyle(color:Colors.grey, fontSize: 22, fontWeight: FontWeight.normal),),
                                                 ],
                                               ),
@@ -726,7 +733,7 @@ class _ViewDroneMainState extends State<ViewDroneMain> {
                                               Text("Gold",style: TextStyle(color:Colors.yellowAccent, fontSize: 26, fontWeight: FontWeight.bold),),
                                               Row(
                                                 children: <Widget>[
-                                                  Text("560",style: TextStyle(color:Colors.black, fontSize: 22, fontWeight: FontWeight.normal),),
+                                                  Text(courseMap["gold"].toString(),style: TextStyle(color:Colors.black, fontSize: 22, fontWeight: FontWeight.normal),),
                                                   Text("yd",style: TextStyle(color:Colors.grey, fontSize: 22, fontWeight: FontWeight.normal),),
                                                 ],
                                               ),
@@ -747,7 +754,7 @@ class _ViewDroneMainState extends State<ViewDroneMain> {
                                               Text("White",style: TextStyle(color:Colors.grey, fontSize: 26, fontWeight: FontWeight.bold),),
                                               Row(
                                                 children: <Widget>[
-                                                  Text("548",style: TextStyle(color:Colors.black, fontSize: 22, fontWeight: FontWeight.normal),),
+                                                  Text(courseMap["white"].toString(),style: TextStyle(color:Colors.black, fontSize: 22, fontWeight: FontWeight.normal),),
                                                   Text("yd",style: TextStyle(color:Colors.grey, fontSize: 22, fontWeight: FontWeight.normal),),
                                                 ],
                                               ),
@@ -768,7 +775,7 @@ class _ViewDroneMainState extends State<ViewDroneMain> {
                                               Text("Red",style: TextStyle(color:Colors.red, fontSize: 26, fontWeight: FontWeight.bold),),
                                               Row(
                                                 children: <Widget>[
-                                                  Text("436",style: TextStyle(color:Colors.black, fontSize: 22, fontWeight: FontWeight.normal),),
+                                                  Text(courseMap["red"].toString(),style: TextStyle(color:Colors.black, fontSize: 22, fontWeight: FontWeight.normal),),
                                                   Text("yd",style: TextStyle(color:Colors.grey, fontSize: 22, fontWeight: FontWeight.normal),),
                                                 ],
                                               ),
@@ -941,6 +948,35 @@ class _ViewDroneMainState extends State<ViewDroneMain> {
   void dispose() {
     super.dispose();
     _controller.dispose();
+  }
+
+  getDataFromFirebase() async {
+    courseMap = HashMap();
+    footage_url = HashMap();
+    await Firestore.instance.collection("course").getDocuments().then((QuerySnapshot snapShot){
+
+      snapShot.documents.forEach((snapshot){
+        courseMap = snapshot.data;
+
+        snapshot.reference.collection("drone_footage").getDocuments().then((QuerySnapshot childSnapshot){
+          childSnapshot.documents.forEach((childsnapshot){
+            footage_url = childsnapshot.data;
+
+            print(footage_url.toString());
+          });
+
+        }).catchError((error){
+          print('Error: '+error);
+        });
+
+        print(courseMap.toString());
+      });
+
+    }).catchError((error){
+      print('Error: '+error);
+    });
+
+
   }
 
 }
